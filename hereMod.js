@@ -1,4 +1,4 @@
-alert("Holy doly,wish I had!");
+alert("Holy doly,wish I had! you bet...");
 
 function loadScript(url, callback)
 {

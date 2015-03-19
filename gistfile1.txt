@@ -18,4 +18,3 @@ function loadScript(url, callback)
 }
 
 loadScript("https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js");
-loadScript("https://gist.githubusercontent.com/edoardoo/2204168e8f0f46922d54/raw/50f3c6a4ede4436beaca4015468f1c614bc2fa03/gistfile1.txt");

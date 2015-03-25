@@ -1,0 +1,37 @@
+# Set the righ names: 
+
+inside collection detail list : 
+angular.element($('[data-ng-controller=CollectionDetailCtrl]')).scope().favorites[1].name = "pippo"
+inside every place: 
+angular.element($('[data-ng-controller=PlacesCtrl]')).scope().place.name = "pippo"
+angular.element($('[data-ng-controller=PlacesCtrl]')).scope().$digest()
+
+
+
+# Get the right name: 
+inside collection detail list: 
+
+angular.element($('[data-ng-controller=CollectionDetailCtrl]')).scope().favorites[1].customName
+
+
+# Procedura: 
+- ancorarsi alla fine del caricamento di CollectionDetailCtrl 
+- bind di funzione che: 
+	- fa array globale con [placeId : customName] 
+	- sostituisce a 
+	angular.element($('[data-ng-controller=CollectionDetailCtrl]')).scope().favorites[1].name = customName
+- bind di funzione ancorata alla fine di PlacesCtrl che :
+	- sostituisce a 
+		angular.element($('[data-ng-controller=PlacesCtrl]')).scope().place.name il customName preso dall'array globale
+		committa il digest
+
+# Change names
+	da desktop si puo' fare? Lo supportano le api? NOPE
+
+
+# Export Places
+	build a parsing function which download a kml file. 
+
+
+# Import Places 
+	NTH Do I really need it?

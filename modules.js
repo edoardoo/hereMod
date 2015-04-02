@@ -406,3 +406,49 @@ angular.module("hereApp.places").controller("PlacesCtrl", ["$scope", "Features",
             u.$broadcast("openShare")
         }
     }])
+
+ 
+t.downloadBackup = function() {
+        var collectionsWithFaves = [];
+        var collections = n.readonlyCollections;
+        n.getAllFavorites()
+            .then(function(b) {
+
+                    collections.forEach(function(collection){ 
+                        tmpFavesOfCollection = jQuery.grep(b, function(fave){
+                            var check = false, i=0;
+                            while( (check ==  false) && (i < fave.collectionId.length) ) 
+                                {
+                                    check = (fave.collectionId[i] ==  collection.id);
+                                    i++;    
+                                }
+                            return check;
+                        });
+                        collectionsWithFaves.push({"id": collection.id, "name":collection.name, "description":collection.description,"faves": tmpFavesOfCollection});
+                    });
+                    console.dir(collectionsWithFaves);
+                    var base = "<?xml version=\'1.0\' encoding=\'UTF-8\'?><kml xmlns=\'http:\/\/www.opengis.net\/kml\/2.2\'><Document>@content<\/Document><\/kml>";                    
+                    var element = "<Placemark><name>@name<\/name><description>@description<\/description><Point><coordinates>@coordinates<\/coordinates><\/Point><\/Placemark>";
+                    var collectionString = "<Folder><name>@name<\/name>@placemarks<\/Folder>";
+                    var collections = "";
+
+                    collectionsWithFaves.forEach(function(e) {
+                        var o = collectionString.replace("@name", e.name),
+                            n = "";
+                        e.faves.forEach(function(f) {
+                            n += element.replace("@name", f.name)
+                                .replace("@description", f.location.address.text)
+                                .replace("@coordinates", f.location.position.longitude + "," + f.location.position.latitude + ",0")
+                        }), o = o.replace("@placemarks", n), collections += o
+                    }), base = base.replace("@content", collections);
+
+                    var pom = document.createElement('a');
+                    pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(base));
+                    pom.setAttribute('download', 'Backup.kml');
+                    pom.style.display = 'none';
+                    document.body.appendChild(pom);
+                    pom.click();
+                    document.body.removeChild(pom);
+})};
+
+

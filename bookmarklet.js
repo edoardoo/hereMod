@@ -1,5 +1,5 @@
 javascript: (function () {     
 	var jsCode = document.createElement('script');     
-	jsCode.setAttribute('src', 'https://rawgit.com/edoardoo/2204168e8f0f46922d54/raw/hereMod.js');                    
+	jsCode.setAttribute('src', 'https://rawgit.com/edoardoo/2204168e8f0f46922d54/raw/there.js');                    
 	document.body.appendChild(jsCode);  
 }());

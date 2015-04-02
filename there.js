@@ -1,3 +1,10 @@
+/*
+tHere, topping here.com maps app with some neat features
+
+url: http://edoardoo.github.io/there/
+author: Edoardo Odorico, edoardoo.com, edo[at]lenotta.com
+license: MIT
+*/
 
 function loadScript(url, callback)
 {

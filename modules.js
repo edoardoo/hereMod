@@ -343,7 +343,7 @@ angular.module("hereApp.collections")
 		pom.click();
 		document.body.removeChild(pom);
 	},t.assembleBackup = function(optimizedFaves){
-		var base = "<?xml version='1.0' encoding='UTF-8'?>\n<kml xmlns='http://www.opengis.net/kml/2.2 '>\n<Document>@content</Document>\n</kml>",
+		var base = "<?xml version='1.0' encoding='UTF-8'?>\n<kml xmlns='http://www.opengis.net/kml/2.2'>\n<Document>@content</Document>\n</kml>",
 		element = "\n<Placemark>\n<name>@name</name>\n<description>@description</description>\n<Point>\n<coordinates>@coordinates</coordinates>\n</Point>\n</Placemark>",
 		collectionString = "\n<Folder>\n<name>@name</name>\n@placemarks\n</Folder>",
 		collections = "";
@@ -360,7 +360,7 @@ angular.module("hereApp.collections")
 		});
 		return base.replace("@content", collections);
 
-	} , t.downloadBackup = function() {
+		}, t.downloadBackup = function() {
 
 		var that = this;
 		var o = [],
@@ -368,7 +368,7 @@ angular.module("hereApp.collections")
 
 		 
 		String.prototype.escapeXml = function () {
-
+			//remember to escape &amp again after compression and escaping!!!!!!
 			var XML_CHAR_MAP = {
 				'<': '&lt;',
 				'>': '&gt;',
@@ -414,8 +414,8 @@ angular.module("hereApp.collections")
 								if( eId !== false ){
 									indexOfCollection = optimizedFaves.push({
 										id: nth.collectionId[k],
-										name: e[eId].name ? e[eId].name : 'no name',
-										description: e[eId].description ? e[eId].description : 'no description',
+										name: e[eId].name ? e[eId].name.escapeXml() : 'no name',
+										description: e[eId].description ? e[eId].description.escapeXml() : 'no description',
 										faves: []
 									});
 								}else{
